@@ -5,6 +5,7 @@ import {Container} from './styles'
 import Results from './Results'
 import NotFound from './NotFound'
 import Loading from '../../components/Loading'
+import {AnimatePresence} from 'framer-motion'
 
 const Home = () => {
   const [query, setQuery] = useState('')
@@ -29,8 +30,10 @@ const Home = () => {
           />
           {loading && <Loading/>}
         </div>
-        {!isEmpty(results) && <Results query={query} results={results} />}
-        {(isEmpty(results) && query && !loading) && <NotFound/>}
+        <AnimatePresence>
+          {!isEmpty(results) && <Results query={query} results={results} />}
+          {(isEmpty(results) && query && !loading) && <NotFound/>}
+        </AnimatePresence>
       </div>
     </Container>
   )
